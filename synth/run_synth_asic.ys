@@ -1,29 +1,19 @@
-# Yosys ASIC Synthesis Script for Apex-L1Cache
-# Target Library: Nangate 45nm Open Cell Library
+# Yosys ASIC Synthesis Script for Apex-L1Cache Controller
+# Target: Nangate 45nm Open Cell Library (Typical Corner)
 
 read_verilog -sv rtl/tag_array.v
 read_verilog -sv rtl/plru_replacement.v
-read_verilog -sv rtl/data_array.v
 read_verilog -sv rtl/mshr_table.v
 read_verilog -sv rtl/writeback_buffer.v
 read_verilog -sv rtl/axi4_master_interface.v
-read_verilog -sv rtl/apex_cache_top.v
+read_verilog -sv rtl/apex_cache_controller.v
 
-# Elaboration and Hierarchy Check
-hierarchy -check -top apex_cache_top
+hierarchy -check -top apex_cache_controller
+synth -top apex_cache_controller -flatten
 
-# High-Level Synthesis & Flattening
-synth -top apex_cache_top -flatten
-
-# Technology Mapping to Nangate 45nm
 dfflibmap -liberty synth/nangate45.lib
 abc -liberty synth/nangate45.lib
 
-# Clean up
 clean
-
-# Print Area & Gate Count Statistics
 stat -liberty synth/nangate45.lib
-
-# Write Synthesized Netlist
-write_verilog -noattr synth/apex_cache_nangate45_netlist.v
+write_verilog -noattr synth/apex_cache_controller_nangate45_netlist.v
