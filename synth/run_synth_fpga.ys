@@ -1,0 +1,14 @@
+# Yosys FPGA Synthesis Script for Apex-L1Cache
+# Target: Xilinx 7-Series (Artix-7 / Kintex-7)
+
+read_verilog -sv rtl/tag_array.v
+read_verilog -sv rtl/plru_replacement.v
+read_verilog -sv rtl/data_array.v
+read_verilog -sv rtl/mshr_table.v
+read_verilog -sv rtl/writeback_buffer.v
+read_verilog -sv rtl/axi4_master_interface.v
+read_verilog -sv rtl/apex_cache_top.v
+
+hierarchy -check -top apex_cache_top
+synth_xilinx -family xc7 -top apex_cache_top
+stat

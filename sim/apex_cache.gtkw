@@ -1,0 +1,59 @@
+[*]
+[*] GTKWave Analyzer Configuration File for Apex-L1Cache
+[*]
+[dumpfile] "sim/apex_cache.vcd"
+[savefile] "sim/apex_cache.gtkw"
+[timestart] 0
+[size] 1400 800
+[pos] -1 -1
+*-marks- 
+[treeopen] tb_nonblocking_cache.
+[treeopen] tb_nonblocking_cache.uut.
+@28
+tb_nonblocking_cache.clk
+tb_nonblocking_cache.rst_n
+@200
+-Core Request Interface
+@28
+tb_nonblocking_cache.core_req_valid
+tb_nonblocking_cache.core_req_ready
+tb_nonblocking_cache.core_req_is_write
+@22
+tb_nonblocking_cache.core_req_addr[31:0]
+tb_nonblocking_cache.core_req_wdata[31:0]
+tb_nonblocking_cache.core_req_id[3:0]
+@200
+-Cache Core Status
+@28
+tb_nonblocking_cache.uut.tag_hit
+tb_nonblocking_cache.uut.tag_hit_way[1:0]
+tb_nonblocking_cache.uut.mshr_secondary_hit
+tb_nonblocking_cache.uut.mshr_full
+@200
+-Core Response
+@28
+tb_nonblocking_cache.core_resp_valid
+@22
+tb_nonblocking_cache.core_resp_data[31:0]
+tb_nonblocking_cache.core_resp_id[3:0]
+@200
+-Performance Counters
+@22
+tb_nonblocking_cache.perf_hits[31:0]
+tb_nonblocking_cache.perf_misses[31:0]
+tb_nonblocking_cache.perf_hit_under_miss[31:0]
+@200
+-AMBA AXI4 Bus Interface
+@28
+tb_nonblocking_cache.m_axi_arvalid
+tb_nonblocking_cache.m_axi_arready
+@22
+tb_nonblocking_cache.m_axi_araddr[31:0]
+@28
+tb_nonblocking_cache.m_axi_rvalid
+tb_nonblocking_cache.m_axi_rready
+tb_nonblocking_cache.m_axi_rlast
+@22
+tb_nonblocking_cache.m_axi_rdata[31:0]
+[pattern_trace] 1
+[pattern_trace] 0
