@@ -1,6 +1,6 @@
-# Apex-L1Cache: High-Performance Non-Blocking L1 Data Cache (VLSI IP Core)
+# L1-Cache: Non-Blocking Level-1 Data Cache Subsystem
 
-**Apex-L1Cache** is a synthesizable, 4-way set-associative non-blocking Level-1 Data Cache IP core designed for modern high-performance microprocessors (such as RISC-V or ARM cores). Written in synthesizable SystemVerilog/Verilog, the core implements **Hit-Under-Miss** and **Miss-Under-Miss** execution using a 4-entry Miss Status Holding Register (MSHR) table, reducing memory stall penalties by allowing independent cache hits to complete while main memory fetches missed cache lines over an **AMBA AXI4** bus.
+This L1 Cache is a synthesizable, 4-way set-associative non-blocking Level-1 Data Cache IP core designed for modern high-performance microprocessors (such as RISC-V or ARM cores). Written in synthesizable SystemVerilog/Verilog, the core implements **Hit-Under-Miss** and **Miss-Under-Miss** execution using a 4-entry Miss Status Holding Register (MSHR) table, reducing memory stall penalties by allowing independent cache hits to complete while main memory fetches missed cache lines over an **AMBA AXI4** bus.
 
 ---
 
@@ -11,7 +11,7 @@ In traditional university processor projects, caches are strictly **blocking**: 
 In real-world workloads, memory instructions often exhibit spatial and temporal independence:
 - A program may miss on an array in function $A$, but immediately read local variables or stack pointers that are already cached.
 - A blocking cache halts all execution on the first miss.
-- **Apex-L1Cache eliminates this bottleneck** by buffering the outstanding miss in hardware (MSHR), allowing subsequent instructions to access the cache concurrently with **zero stall cycles**.
+- **This non-blocking architecture eliminates this bottleneck** by buffering the outstanding miss in hardware (MSHR), allowing subsequent instructions to access the cache concurrently with **zero stall cycles**.
 
 ---
 
@@ -60,7 +60,7 @@ In real-world workloads, memory instructions often exhibit spatial and temporal 
 
 ### B. Tree Pseudo-LRU (Tree-PLRU) Replacement Policy
 - Standard True-LRU for 4-way caches requires complex age matrices ($O(N^2)$).
-- Apex-L1Cache implements **Tree-PLRU** with a 3-bit binary decision tree per set ($32 \times 3 = 96$ flip-flops total), determining the victim line in $O(1)$ constant time with zero arithmetic multipliers.
+- L1-Cache implements **Tree-PLRU** with a 3-bit binary decision tree per set ($32 \times 3 = 96$ flip-flops total), determining the victim line in $O(1)$ constant time with zero arithmetic multipliers.
 
 ### C. Write-Back with Non-Blocking Dirty Eviction Buffer
 - Employs a **Write-Back, Write-Allocate** policy: memory writes update cache lines locally and assert a dirty bit.
@@ -136,7 +136,7 @@ apex-cache/
 ## 7. How to Run & Verify
 
 ### Quick Start: Graphical Desktop Workbench (GUI)
-Double-click [`Launch_EDA_Workbench.bat`](file:///Launch_EDA_Workbench.bat) *(or double-click the **"Apex-L1Cache - EDA Workbench"** desktop shortcut)* to open the native graphical dashboard where you can run simulations, view waveforms, and launch synthesis with one click.
+Double-click [`Launch_EDA_Workbench.bat`](file:///Launch_EDA_Workbench.bat) *(or double-click the **"L1-Cache - EDA Workbench"** desktop shortcut)* to open the native graphical dashboard where you can run simulations, view waveforms, and launch synthesis with one click.
 
 ### Command Line Verification
 #### 1. Run Python Reference Model
